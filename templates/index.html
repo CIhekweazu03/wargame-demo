@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Wargaming Platform</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Wargaming Platform</h1>
+        
+        <div id="login-section">
+            <h2>Join or Create a Game</h2>
+            
+            <div class="form-group">
+                <label for="username">Your Name:</label>
+                <input type="text" id="username">
+            </div>
+            
+            <div class="form-group">
+                <label for="role">Select Role:</label>
+                <select id="role">
+                    <option value="Team Leader">Team Leader</option>
+                    <option value="Military Advisor">Military Advisor</option>
+                    <option value="Economic Advisor">Economic Advisor</option>
+                    <option value="Intelligence Officer">Intelligence Officer</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="team-action">Team:</label>
+                <select id="team-action">
+                    <option value="create">Create New Team</option>
+                    <option value="join">Join Existing Team</option>
+                </select>
+            </div>
+            
+            <!-- Create Team Options -->
+            <div id="create-team-section">
+                <div class="form-group">
+                    <label for="team-name">Team Name:</label>
+                    <input type="text" id="team-name">
+                </div>
+                
+                <div class="form-group">
+                    <label for="scenario">Initial Scenario:</label>
+                    <textarea id="scenario-input" rows="5" style="width: 100%;">The neighboring country of Azuristan has mobilized troops along your border following a diplomatic dispute over water rights. Intelligence suggests they may be preparing for military action within the next 72 hours. As the leadership team, you must decide how to respond to this escalating crisis. Your military forces are at 70% readiness, and you have diplomatic channels still open.</textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>Add AI Teammates:</label>
+                    <div class="ai-teammate-options">
+                        <div class="checkbox-row">
+                            <input type="checkbox" id="ai-military" name="ai_roles" value="Military Advisor">
+                            <label for="ai-military">Military Advisor</label>
+                        </div>
+                        <div class="checkbox-row">
+                            <input type="checkbox" id="ai-economic" name="ai_roles" value="Economic Advisor">
+                            <label for="ai-economic">Economic Advisor</label>
+                        </div>
+                        <div class="checkbox-row">
+                            <input type="checkbox" id="ai-intelligence" name="ai_roles" value="Intelligence Officer">
+                            <label for="ai-intelligence">Intelligence Officer</label>
+                        </div>
+                        <div class="checkbox-row">
+                            <input type="checkbox" id="ai-diplomatic" name="ai_roles" value="Diplomatic Advisor">
+                            <label for="ai-diplomatic">Diplomatic Advisor</label>
+                        </div>
+                    </div>
+                    <p class="hint-text">Tip: You can ask for their "thoughts?" during the game to get their input.</p>
+                </div>
+            </div>
+            
+            <!-- Join Team Options -->
+            <div id="join-team-section" style="display: none;">
+                <div class="form-group">
+                    <label for="existing-teams">Select Team:</label>
+                    <div style="display: flex; gap: 10px;">
+                        <select id="existing-teams" style="flex-grow: 1;">
+                            <option value="">-- Select a Team --</option>
+                            <!-- Teams will be populated dynamically -->
+                        </select>
+                        <button type="button" id="refresh-teams" class="btn-secondary">
+                            Refresh
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <button id="join-button" class="btn-primary">Join Game</button>
+        </div>
+        
+        <div id="game-section">
+            <div class="game-container">
+                <div class="scenario-panel">
+                    <h2 id="scenario-title">Current Situation</h2>
+                    <div id="scenario-display"></div>
+                    
+                    <!-- History panel -->
+                    <div class="history-panel">
+                        <h3>Situation History</h3>
+                        <div class="history-container" id="history-container">
+                            <!-- Situation history will be populated here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chat-panel">
+                    <h2>Team Discussion</h2>
+                    <div class="chat-messages" id="chat-messages"></div>
+                    <div class="input-area">
+                        <input type="text" id="chat-input" placeholder="Type your message...">
+                        <button id="send-button">Send</button>
+                    </div>
+                </div>
+                
+                <div class="decision-panel" id="decision-panel">
+                    <h2>Team Decision</h2>
+                    <p>As the Team Leader, you can submit a decision to advance the scenario.</p>
+                    <textarea id="decision-input" placeholder="Enter your team's decision..."></textarea>
+                    <button id="submit-decision">Submit Decision</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="/static/js/main.js"></script>
+</body>
+</html>
