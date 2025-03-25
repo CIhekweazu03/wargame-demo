@@ -1,0 +1,9 @@
+flask==2.3.3
+flask-socketio==5.3.5
+python-socketio==5.9.0
+python-engineio==4.7.1
+eventlet==0.33.3
+boto3==1.28.63
+uuid==1.30
+python-dotenv==1.0.0
+gunicorn==21.2.0
